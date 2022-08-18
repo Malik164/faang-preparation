@@ -145,3 +145,78 @@ function convertBinary(decimal) {
     }
 
  */
+function flattenObject(object) {
+    // so the base case is when my object is going to be a empty object i will retrun
+    let flattenedObj={}
+    function flattenHelper(obj,prop) {
+        if(typeof obj !== 'object'){
+            // it means that there is no nested object so we can store that value
+            flattenedObj[prop]=obj
+            return
+        }
+        // otherwsie iterate the all nested objects and start flatten it
+        for (const key in obj) {
+            if (prop==='') {
+                flattenHelper(obj[key],prop+key)
+            }
+            else{
+                flattenHelper(obj[key],prop+'.'+key)
+            }
+        }
+    }
+    flattenHelper(object,'')
+    return flattenedObj
+}
+let nestedObj={
+    name:'Adnan',
+    address:{
+        city:'Jhang',
+        country:'Pakistan',
+        livingArea:{
+            street:'near rehman street',
+            state:'18 Hazari'
+        }
+    }
+}
+
+// console.log(flattenObject(nestedObj));
+
+
+
+//Q --- PRINT ALL PREMUTATIONS OF ARRAY -----------------------------
+// So the premiutaions means that all possible combinations of an array
+/*like --- [1,2,3] => [[1,2,3],[2,1,3],[2,3,1],[1,3,2],[3,1,2],[3,2,1]]
+//- time complexiy is O(n!) means for  n=3 the permuations will be 3! = 6 
+
+so the idea is the base case and divide an array
+base case--> if an array is empty so there is no need to print further permutations!
+
+recursion tree=> [1,2] so idea is that
+the we will remove one by one elements and when array is empty so it will be pushed to the answers
+
+*/
+
+function printPermuteArray(array) {
+    var answers=[]
+    function permuteHelper(arr,set=[]) {
+        if (arr.length===0) {
+            answers.push([...set])
+        }
+        //otherwise iterate over array
+        for (let i = 0; i < arr.length; i++) {
+            
+            // remove element one by one
+            let newArr=arr.filter((_,index)=>index!==i)
+            let currentElm=arr[i]
+            set.push(currentElm)
+            permuteHelper(newArr,set)
+            set.pop()
+        }
+    }
+    permuteHelper(array)
+    return answers
+}
+
+// console.log(printPermuteArray('iqra'.split('')))
+// console.log(printPermuteArray('iqra'.split('')).length)
+// console.log(printPermuteArray('ad'.split('')));
