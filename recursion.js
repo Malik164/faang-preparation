@@ -220,3 +220,6 @@ function printPermuteArray(array) {
 // console.log(printPermuteArray('iqra'.split('')))
 // console.log(printPermuteArray('iqra'.split('')).length)
 // console.log(printPermuteArray('ad'.split('')));
+
+
+//
